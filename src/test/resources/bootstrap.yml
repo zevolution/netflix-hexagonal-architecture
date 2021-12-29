@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: service--softwares-info
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  profiles:
+    active: test
+
+server:
+  servlet:
+    context-path: /${spring.application.name}
+
+management:
+  server:
+    port: 9090
+  context-path: /actuator
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+webservices:
+  host: http://localhost
+  port: 9000
+  github:
+    host: ${webservices.host}:${webservices.port}
+    services:
+      repos: ${webservices.github.host}/repos
+  gitlab:
+    host: ${webservices.host}:${webservices.port}
+    services:
+      users: ${webservices.gitlab.host}/users

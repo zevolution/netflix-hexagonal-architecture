@@ -1,0 +1,11 @@
+webservices:
+  host: http://localhost
+  port: 9000
+  github:
+    host: ${webservices.host}:${webservices.port}
+    services:
+      repos: ${webservices.github.host}/repos
+  gitlab:
+    host: ${webservices.host}:${webservices.port}
+    services:
+      users: ${webservices.gitlab.host}/users

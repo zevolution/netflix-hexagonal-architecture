@@ -1,0 +1,18 @@
+logging:
+  level:
+    org:
+      zalando:
+        logbook: TRACE
+
+logbook:
+  exclude:
+    - /metrics
+    - /actuator/**
+    - /health
+    - /swagger-ui.html
+    - /swagger-ui/
+    - /swagger-resources/**
+    - /webjars/**
+    - /v2/api-docs
+    - /csrf
+    - /info

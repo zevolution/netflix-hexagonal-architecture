@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: service--softwares-info
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  config:
+    import: optional:configserver:http://zevolution.com.br
+    activate:
+      on-profile: default
+  cloud:
+    config:
+      uri: http://config.zevolution.com.br
+      password: dummy
+      username: dummy
+
+server:
+  servlet:
+    context-path: /${spring.application.name}
+
+management:
+  server:
+    port: 9090
+  context-path: /actuator
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

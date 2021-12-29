@@ -1,0 +1,63 @@
+openapi: 3.0.0
+info:
+  title: Softwares API
+  description: API to get software info in cloud git providers
+  termsOfService: https://zevolution.com.br/terms/
+  contact:
+    name: API Support
+    url: https://www.zevolution.com.br/support
+    email: support@zevolution.com.br
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: "1.0"
+servers:
+  - url: https://apps-dev.zevolution.com.br/sample
+    description: Development server
+  - url: https://apps-hml.zevolution.com.br/sample
+    description: Staging server
+  - url: https://apps-prd.zevolution.com.br/sample
+    description: Production server
+paths:
+  '/authors/name/{authorName}/softwares':
+    parameters:
+      - schema:
+          type: string
+        name: authorName
+        in: path
+        required: true
+    get:
+      summary: Softwares By Author
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SoftwareByAuthorResult'
+      operationId: getSoftwaresByAuthor
+      description: Get softwares by author and optional filter values
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: softwareName
+          description: Name to search software
+components:
+  schemas:
+    SoftwareByAuthorResult:
+      title: SoftwareByAuthorResult
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        score:
+          type: integer
+        author:
+          type: string
+  responses: {}

@@ -1,0 +1,43 @@
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  main:
+    banner-mode: 'OFF'
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+
+opentracing:
+  spring:
+    web:
+      enabled: true
+  jaeger:
+    service-name: service--softwares-info
+    enabled: true
+    enable-b3-propagation: true
+    probabilistic-sampler:
+      sampling-rate: ${OPENTRACING_SAMPLER_RATE:1}
+    http-sender:
+      url: ${JAEGER_HOST:http://jaeger-collector.zevolution.com.br:13157/api/traces}
+
+resilience4j:
+  retry:
+    configs:
+      default:
+        maxRetryAttempts: 2
+        waitDuration: 5000
+    instances:
+      global:
+        baseConfig: default
+
+webservices:
+  github:
+    host: https://api.github.com
+    services:
+      repos: ${webservices.github.host}/repos
+  gitlab:
+    host: https://gitlab.com/api/v4
+    services:
+      users: ${webservices.gitlab.host}/users
