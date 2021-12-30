@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: zevolution/netflix-hexagonal-architecture
+    container_name: netflix-hexagonal-architecture
+    ports:
+      - '8180:8080'
+      - '5105:5005'
+      - '9190:9090'
+    environment:
+      ADDITIONAL_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xmx256m -Xms128m -XX:MaxMetaspaceSize=128m"
+      TZ: "America/Sao_Paulo"
