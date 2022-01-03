@@ -53,7 +53,7 @@ gh repo clone zevolution/netflix-hexagonal-architecture
 1. After open project in your IDE, run `mvn clean generate-resources` to generate stub OpenAPI structure with `OpenAPI Generator` in target folder.
 2. Default api-port is `8180`
 3. Default debug-port is `5105`
-4. Default actuator-port is `9090`
+4. Default actuator-port is `9190`
 5. Default context-path `/service--softwares-info`
 6. Swagger URI `/service--softwares-info/swagger-ui/`
 7. Actuator URI `/actuator`
