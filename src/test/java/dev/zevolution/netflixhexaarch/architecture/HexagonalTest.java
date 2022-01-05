@@ -11,16 +11,20 @@ public class HexagonalTest {
 
     @ArchTest
     public static final ArchRule layersValidator = Architectures.layeredArchitecture()
-            .layer("Entities").definedBy("..entities..")
-            .layer("Interactors").definedBy("..interactors..")
-            .layer("Repositories").definedBy("..repositories..")
-            .layer("Datasources").definedBy("..datasources..")
-            .layer("TransportLayers").definedBy("..transportlayers..")
-            .layer("Configs").definedBy("..configs..")
+            .layer("Internal").definedBy("..internal..")
+            .layer("Adapter").definedBy("..adapter..")
+            .layer("Entities").definedBy("..internal.entities..")
+            .layer("Interactors").definedBy("..internal.interactors..")
+            .layer("Repositories").definedBy("..internal.repositories..")
+            .layer("Datasources").definedBy("..adapter.datasources..")
+            .layer("TransportLayers").definedBy("..adapter.transportlayers..")
+            .layer("Configs").definedBy("..bootstrap..")
+            .layer("Exceptions").definedBy("..bootstrap.exceptions..")
+
             .whereLayer("Interactors").mayOnlyBeAccessedByLayers("TransportLayers", "Configs")
             .whereLayer("Repositories").mayOnlyBeAccessedByLayers("Interactors", "Datasources", "Configs")
             .whereLayer("Datasources").mayOnlyBeAccessedByLayers("Configs")
             .whereLayer("TransportLayers").mayOnlyBeAccessedByLayers("Configs")
-            .whereLayer("Configs").mayNotBeAccessedByAnyLayer();
+            .whereLayer("Exceptions").mayOnlyBeAccessedByLayers("Internal", "Adapter", "Configs");
 
 }
